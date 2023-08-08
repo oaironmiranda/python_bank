@@ -17,4 +17,4 @@ def getName(email, password):
     
     myresult = cursor.fetchall()
     for x in myresult:
-         return (str(x[0]))
+         return str(x[0])

@@ -72,3 +72,35 @@ def changePassword(email, password):
     cnx.commit()
 
     return print("New Password updated")
+
+def checkTable(code):
+     
+    con = userData()
+    cursor = con.cursor()
+    database = userData().database
+
+    cursor.execute("SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = %s AND table_name = %s", (database, code))
+    if cursor.fetchone()[0] == 1:
+        cursor.close()
+        return code
+    else:
+        cursor.close()
+        return print(f"A tabela {code} não existe.")
+    
+def insertInTable(code, where):
+    con = userData()
+    insert = con.cursor()
+
+    price = input("Price: ")
+    typo = where
+    desc = input("Description: ")
+    date = int(input("Date: "))
+    month = int(input("Month: "))
+    year = int(input("Year: "))
+
+    sql = "INSERT INTO %s (price, type, description, date, month, year) VALUES (%s, %s, %s, %s, %s, %s)" % (code, '%s', '%s', '%s', '%s', '%s', '%s')
+    val = (price, typo, desc, date, month, year)
+    insert.execute(sql, val)
+    con.commit()
+
+    return print(f"{desc} from date {date}/{month}/{year}\nwith the value {price} has been added to {typo} in table {code}")

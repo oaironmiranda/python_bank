@@ -17,5 +17,8 @@ def createUserInfo(code):
     mycursor.execute(f"""CREATE TABLE IF NOT EXISTS {code}(
                      price VARCHAR(255) NOT NULL,
                      type VARCHAR(255) NOT NULL,
-                     description VARCHAR(255) NOT NULL)""")
+                     description VARCHAR(255) NOT NULL,
+                     date INT,
+                     month INT,
+                     year INT)""")
     return print(f"{code} table added")
